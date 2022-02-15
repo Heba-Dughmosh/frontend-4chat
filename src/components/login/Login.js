@@ -22,14 +22,17 @@ function Login() {
   
   const makeConnection = async(e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/login", {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        user: {username:username,password:pwd},
-      }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/login`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user: { username: username, password: pwd },
+        }),
+      }
+    );
     if (response.ok) {
       navigate("/chat");
     }
